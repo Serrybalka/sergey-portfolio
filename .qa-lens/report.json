@@ -1,0 +1,100 @@
+[
+  {
+    "section": "hero",
+    "point": {
+      "x": 960,
+      "y": 482
+    },
+    "diagnostics": {
+      "lensExists": true,
+      "mirrorExists": true,
+      "lensOpacity": "1",
+      "mirrorTransform": "matrix(2, 0, 0, 2, -1843.91, -905.858)"
+    },
+    "file": "C:\\VS CODEX\\sergey-portfolio\\.qa-lens\\lens-hero.png"
+  },
+  {
+    "section": "impact",
+    "point": {
+      "x": 828,
+      "y": 516
+    },
+    "diagnostics": {
+      "lensExists": true,
+      "mirrorExists": true,
+      "lensOpacity": "1",
+      "mirrorTransform": "matrix(2, 0, 0, 2, -1617.03, -5367.72)"
+    },
+    "file": "C:\\VS CODEX\\sergey-portfolio\\.qa-lens\\lens-impact.png"
+  },
+  {
+    "section": "expertise",
+    "point": {
+      "x": 828,
+      "y": 516
+    },
+    "diagnostics": {
+      "lensExists": true,
+      "mirrorExists": true,
+      "lensOpacity": "1",
+      "mirrorTransform": "matrix(2, 0, 0, 2, -1616, -7494)"
+    },
+    "file": "C:\\VS CODEX\\sergey-portfolio\\.qa-lens\\lens-expertise.png"
+  },
+  {
+    "section": "cases",
+    "point": {
+      "x": 828,
+      "y": 516
+    },
+    "diagnostics": {
+      "lensExists": true,
+      "mirrorExists": true,
+      "lensOpacity": "1",
+      "mirrorTransform": "matrix(2, 0, 0, 2, -1616, -9460)"
+    },
+    "file": "C:\\VS CODEX\\sergey-portfolio\\.qa-lens\\lens-cases.png"
+  },
+  {
+    "section": "process",
+    "point": {
+      "x": 828,
+      "y": 516
+    },
+    "diagnostics": {
+      "lensExists": true,
+      "mirrorExists": true,
+      "lensOpacity": "1",
+      "mirrorTransform": "matrix(2, 0, 0, 2, -1616, -16718)"
+    },
+    "file": "C:\\VS CODEX\\sergey-portfolio\\.qa-lens\\lens-process.png"
+  },
+  {
+    "section": "about",
+    "point": {
+      "x": 960,
+      "y": 516
+    },
+    "diagnostics": {
+      "lensExists": true,
+      "mirrorExists": true,
+      "lensOpacity": "1",
+      "mirrorTransform": "matrix(2, 0, 0, 2, -1879.16, -18218)"
+    },
+    "file": "C:\\VS CODEX\\sergey-portfolio\\.qa-lens\\lens-about.png"
+  },
+  {
+    "section": "contact",
+    "point": {
+      "x": 828,
+      "y": 516
+    },
+    "diagnostics": {
+      "lensExists": true,
+      "mirrorExists": true,
+      "lensOpacity": "1",
+      "mirrorTransform": "matrix(2, 0, 0, 2, -1616.82, -19772)"
+    },
+    "file": "C:\\VS CODEX\\sergey-portfolio\\.qa-lens\\lens-contact.png"
+  }
+]

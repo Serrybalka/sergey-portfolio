@@ -1,0 +1,255 @@
+﻿name: Deploy Production to Yandex Object Storage
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      rollback_run_id:
+        description: "GitHub Run ID for rollback (leave empty for regular deploy)"
+        required: false
+        type: string
+      rollback_artifact_name:
+        description: "Artifact name used for rollback"
+        required: false
+        default: "dist-build"
+        type: string
+      reason:
+        description: "Reason for manual run"
+        required: false
+        type: string
+      target_environment:
+        description: "GitHub Environment name"
+        required: false
+        default: "production"
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: deploy-production-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  YC_ENDPOINT: https://storage.yandexcloud.net
+  DIST_DIR: dist
+  DEFAULT_ARTIFACT_NAME: dist-build
+
+jobs:
+  deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    environment: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.target_environment || 'production' }}
+    env:
+      YC_BUCKET: ${{ secrets.YC_BUCKET }}
+      YC_REGION: ${{ secrets.YC_REGION }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
+      AWS_DEFAULT_REGION: ${{ secrets.YC_REGION }}
+      ROLLBACK_RUN_ID: ${{ github.event.inputs.rollback_run_id }}
+      ROLLBACK_ARTIFACT_NAME: ${{ github.event.inputs.rollback_artifact_name }}
+    steps:
+      - name: Validate required secrets
+        shell: bash
+        run: |
+          set -euo pipefail
+          for var in YC_BUCKET YC_REGION AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY; do
+            if [ -z "${!var:-}" ]; then
+              echo "::error::Missing required secret or env: $var"
+              exit 1
+            fi
+          done
+          echo "Target bucket: ${YC_BUCKET}"
+
+      - name: Checkout repository
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.rollback_run_id == '' }}
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.rollback_run_id == '' }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.rollback_run_id == '' }}
+        shell: bash
+        run: npm ci
+
+      - name: Build production bundle
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.rollback_run_id == '' }}
+        shell: bash
+        run: npm run build
+
+      - name: Download rollback artifact
+        if: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.rollback_run_id != '' }}
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ github.event.inputs.rollback_artifact_name }}
+          run-id: ${{ github.event.inputs.rollback_run_id }}
+          github-token: ${{ github.token }}
+          path: .
+
+      - name: Validate dist output
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -d "${DIST_DIR}" ]; then
+            echo "::error::dist directory is missing"
+            exit 1
+          fi
+          if [ ! -f "${DIST_DIR}/index.html" ]; then
+            echo "::error::dist/index.html is missing"
+            exit 1
+          fi
+          echo "dist content:"
+          ls -la "${DIST_DIR}"
+
+      - name: Upload build artifact for rollback
+        if: ${{ github.event_name != 'workflow_dispatch' || github.event.inputs.rollback_run_id == '' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.DEFAULT_ARTIFACT_NAME }}
+          path: dist
+          retention-days: 14
+
+      - name: Install AWS CLI
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y awscli
+          aws --version
+
+      - name: Verify bucket website hosting config
+        shell: bash
+        run: |
+          set -euo pipefail
+          INDEX_SUFFIX="$(aws s3api get-bucket-website \
+            --bucket "${YC_BUCKET}" \
+            --endpoint-url "${YC_ENDPOINT}" \
+            --query 'IndexDocument.Suffix' \
+            --output text)"
+          ERROR_KEY="$(aws s3api get-bucket-website \
+            --bucket "${YC_BUCKET}" \
+            --endpoint-url "${YC_ENDPOINT}" \
+            --query 'ErrorDocument.Key' \
+            --output text)"
+          if [ -z "${INDEX_SUFFIX}" ] || [ -z "${ERROR_KEY}" ] || [ "${INDEX_SUFFIX}" = "None" ] || [ "${ERROR_KEY}" = "None" ] || [ "${INDEX_SUFFIX}" = "null" ] || [ "${ERROR_KEY}" = "null" ]; then
+            echo "::error::Bucket website hosting is not fully configured (IndexDocument/ErrorDocument)."
+            exit 1
+          fi
+          echo "Website hosting config OK: index=${INDEX_SUFFIX}, error=${ERROR_KEY}"
+
+      - name: Deploy build to Yandex Object Storage
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          retry() {
+            local attempts="$1"
+            local base_delay="$2"
+            shift 2
+            local try=1
+            until "$@"; do
+              if [ "${try}" -ge "${attempts}" ]; then
+                echo "::error::Command failed after ${attempts} attempts: $*"
+                return 1
+              fi
+              local sleep_for=$((base_delay * try))
+              echo "Attempt ${try}/${attempts} failed. Retry in ${sleep_for}s..."
+              sleep "${sleep_for}"
+              try=$((try + 1))
+            done
+          }
+
+          retry 4 4 aws s3 sync "${DIST_DIR}/assets" "s3://${YC_BUCKET}/assets" \
+            --endpoint-url "${YC_ENDPOINT}" \
+            --delete \
+            --cache-control "public,max-age=31536000,immutable" \
+            --only-show-errors
+
+          retry 4 4 aws s3 sync "${DIST_DIR}" "s3://${YC_BUCKET}" \
+            --endpoint-url "${YC_ENDPOINT}" \
+            --exclude "assets/*" \
+            --exclude "index.html" \
+            --cache-control "no-cache,no-store,must-revalidate" \
+            --only-show-errors
+
+          retry 4 4 aws s3 cp "${DIST_DIR}/index.html" "s3://${YC_BUCKET}/index.html" \
+            --endpoint-url "${YC_ENDPOINT}" \
+            --cache-control "no-cache,no-store,must-revalidate" \
+            --content-type "text/html; charset=utf-8" \
+            --only-show-errors
+
+      - name: MIME hardening pass
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          mime_sync() {
+            local include_pattern="$1"
+            local content_type="$2"
+            local cache_control="$3"
+            aws s3 cp "${DIST_DIR}" "s3://${YC_BUCKET}" \
+              --recursive \
+              --endpoint-url "${YC_ENDPOINT}" \
+              --exclude "*" \
+              --include "${include_pattern}" \
+              --content-type "${content_type}" \
+              --cache-control "${cache_control}" \
+              --only-show-errors
+          }
+
+          mime_sync "assets/*.js" "text/javascript" "public,max-age=31536000,immutable"
+          mime_sync "assets/*.css" "text/css" "public,max-age=31536000,immutable"
+          mime_sync "*.svg" "image/svg+xml" "no-cache,no-store,must-revalidate"
+          mime_sync "assets/*.svg" "image/svg+xml" "public,max-age=31536000,immutable"
+          mime_sync "assets/*.woff2" "font/woff2" "public,max-age=31536000,immutable"
+          mime_sync "assets/*.webp" "image/webp" "public,max-age=31536000,immutable"
+          mime_sync "assets/*.json" "application/json" "public,max-age=31536000,immutable"
+          mime_sync "*.json" "application/json" "no-cache,no-store,must-revalidate"
+          mime_sync "assets/*.mp4" "video/mp4" "public,max-age=31536000,immutable"
+
+      - name: Verify deployment health
+        shell: bash
+        run: |
+          set -euo pipefail
+          WEBSITE_URL="http://${YC_BUCKET}.website.yandexcloud.net"
+          STATUS_CODE="$(curl -sS -o /tmp/index.html -w "%{http_code}" --retry 5 --retry-all-errors --retry-delay 3 "${WEBSITE_URL}/")"
+          if [ "${STATUS_CODE}" != "200" ]; then
+            echo "::error::Website returned HTTP ${STATUS_CODE}"
+            exit 1
+          fi
+          if ! grep -Eq 'assets/.*\.(js|css)' /tmp/index.html; then
+            echo "::error::index.html does not contain expected Vite assets references"
+            exit 1
+          fi
+          echo "Deployment verification passed."
+          echo "Website URL: ${WEBSITE_URL}"
+
+      - name: Deployment summary
+        shell: bash
+        run: |
+          set -euo pipefail
+          WEBSITE_URL="http://${YC_BUCKET}.website.yandexcloud.net"
+          {
+            echo "## Yandex Cloud deployment"
+            echo ""
+            echo "- Bucket: \`${YC_BUCKET}\`"
+            echo "- Region: \`${YC_REGION}\`"
+            echo "- Endpoint: \`${YC_ENDPOINT}\`"
+            echo "- Website: ${WEBSITE_URL}"
+            echo "- Mirror: http://website.yandexcloud.net/${YC_BUCKET}/"
+            if [ -n "${ROLLBACK_RUN_ID:-}" ]; then
+              echo "- Mode: rollback from run \`${ROLLBACK_RUN_ID}\`"
+            else
+              echo "- Mode: regular deploy"
+            fi
+          } >> "${GITHUB_STEP_SUMMARY}"

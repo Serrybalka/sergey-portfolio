@@ -1,0 +1,356 @@
+﻿@import 'tailwindcss';
+
+:root {
+  --font-display: 'Sora', 'Space Grotesk', 'Avenir Next', 'Segoe UI', sans-serif;
+  --font-body: 'Manrope', 'IBM Plex Sans', 'Segoe UI', sans-serif;
+  --text-soft: #d3dfef;
+  --text-muted: #8fa0b8;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-soft);
+  background: #05070d;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (min-width: 768px) and (pointer: fine) {
+  body {
+    cursor: default;
+  }
+
+  a[href],
+  button:not(:disabled),
+  [role='button']:not([aria-disabled='true']),
+  summary {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [aria-disabled='true'] {
+    cursor: not-allowed;
+  }
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(to right, rgba(147, 197, 253, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(147, 197, 253, 0.08) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+}
+
+.hero-layer {
+  position: absolute;
+  width: min(16rem, 32vw);
+  height: clamp(3.2rem, 8vw, 4.8rem);
+  border-radius: 1rem;
+  border: 1px solid rgba(125, 186, 255, 0.42);
+  background: linear-gradient(135deg, rgba(74, 144, 255, 0.16), rgba(184, 215, 255, 0.06));
+  box-shadow: 0 24px 38px rgba(9, 20, 38, 0.3);
+  backdrop-filter: blur(2px);
+}
+
+.hero-fallback-layer {
+  position: absolute;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(125, 186, 255, 0.32);
+  background: linear-gradient(130deg, rgba(108, 171, 255, 0.24), rgba(196, 223, 255, 0.08));
+  box-shadow: 0 20px 40px rgba(9, 20, 38, 0.32);
+  animation: hero-fallback-drift 7.5s ease-in-out infinite;
+}
+
+.hero-fallback-layer-delay {
+  animation-delay: -1.8s;
+}
+
+.hero-fallback-layer-slow {
+  animation-duration: 9.2s;
+  animation-delay: -2.6s;
+}
+
+@keyframes hero-fallback-drift {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate3d(16px, -10px, 0) scale(1.02);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+.hero-scene {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  transform: translateZ(0);
+  will-change: transform, opacity, filter;
+}
+
+.hero-scene canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.case-card {
+  transform: translateZ(0);
+}
+
+.case-gallery-card {
+  transform: translateZ(0);
+  will-change: transform;
+}
+
+.case-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(140deg, rgba(49, 116, 224, 0.2), transparent 52%);
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+.case-card:hover::before {
+  opacity: 1;
+}
+
+.case-card-highlighted {
+  border-color: rgba(125, 186, 255, 0.85) !important;
+  box-shadow: 0 0 0 1px rgba(125, 186, 255, 0.5), 0 0 44px rgba(53, 128, 246, 0.35);
+}
+
+.case-overlay-backdrop {
+  background: rgba(2, 6, 12, 0.86);
+  backdrop-filter: blur(12px);
+}
+
+.case-overlay-grid {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at center, black 42%, transparent 92%);
+  opacity: 0.4;
+}
+
+.case-overlay-spotlight {
+  background:
+    radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 24%), rgba(96, 165, 250, 0.25), transparent 42%),
+    radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.12), transparent 46%),
+    linear-gradient(145deg, rgba(8, 16, 30, 0.85), rgba(3, 7, 13, 0.92));
+}
+
+.case-overlay-header {
+  box-shadow: 0 24px 54px rgba(3, 12, 24, 0.45);
+}
+
+.case-overlay-progress-wrap {
+  position: fixed;
+  right: clamp(0.6rem, 1.5vw, 1.4rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  pointer-events: none;
+}
+
+.case-overlay-progress-track {
+  height: 180px;
+  width: 4px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.22);
+  overflow: hidden;
+}
+
+.case-overlay-progress-fill {
+  width: 100%;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(147, 197, 253, 1), rgba(59, 130, 246, 0.82));
+  transition: height 160ms linear;
+}
+
+.process-overlay-backdrop {
+  background: rgba(2, 6, 12, 0.88);
+  backdrop-filter: blur(12px);
+}
+
+.process-overlay-grid {
+  background-image:
+    linear-gradient(to right, rgba(148, 163, 184, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.12) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at center, black 42%, transparent 92%);
+  opacity: 0.42;
+}
+
+.process-overlay-spotlight {
+  background:
+    radial-gradient(circle at var(--spot-x, 50%) var(--spot-y, 24%), rgba(96, 165, 250, 0.26), transparent 42%),
+    radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.12), transparent 46%),
+    linear-gradient(145deg, rgba(8, 16, 30, 0.86), rgba(3, 7, 13, 0.92));
+}
+
+.process-overlay-noise {
+  opacity: 0.06;
+  mix-blend-mode: screen;
+  background-image: radial-gradient(circle, rgba(248, 250, 252, 0.55) 0.5px, transparent 0.5px);
+  background-size: 3px 3px;
+}
+
+.process-overlay-header {
+  box-shadow: 0 24px 54px rgba(3, 12, 24, 0.45);
+}
+
+.process-overlay-progress-wrap {
+  position: fixed;
+  right: clamp(0.6rem, 1.5vw, 1.4rem);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 30;
+  pointer-events: none;
+}
+
+.process-overlay-progress-track {
+  height: 180px;
+  width: 4px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.22);
+  overflow: hidden;
+}
+
+.process-overlay-progress-fill {
+  width: 100%;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(147, 197, 253, 1), rgba(59, 130, 246, 0.82));
+  transition: height 160ms linear;
+}
+
+.impact-modal-backdrop {
+  background: rgba(3, 7, 14, 0.78);
+  backdrop-filter: blur(10px);
+}
+
+.impact-modal-gradient {
+  background-image:
+    radial-gradient(circle at 18% 24%, rgba(44, 124, 255, 0.18), transparent 48%),
+    radial-gradient(circle at 76% 76%, rgba(127, 179, 255, 0.14), transparent 46%),
+    linear-gradient(120deg, rgba(22, 36, 64, 0.82), rgba(4, 8, 16, 0.92), rgba(18, 32, 58, 0.84));
+  background-size: 160% 160%;
+}
+
+.impact-modal-panel {
+  border-radius: 0;
+  background: linear-gradient(155deg, rgba(9, 18, 34, 0.96), rgba(4, 8, 14, 0.98));
+}
+
+.impact-modal-header {
+  box-shadow: 0 16px 42px rgba(3, 12, 26, 0.42);
+}
+
+.system-design-card {
+  transform: translateZ(0);
+}
+
+.system-design-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: linear-gradient(138deg, rgba(49, 116, 224, 0.2), transparent 54%);
+  opacity: 0;
+  transition: opacity 280ms ease;
+}
+
+.system-design-card:hover::before {
+  opacity: 1;
+}
+
+.system-design-overlay-backdrop {
+  background: rgba(3, 7, 14, 0.82);
+  backdrop-filter: blur(12px);
+}
+
+.system-design-overlay-gradient {
+  background-image:
+    radial-gradient(circle at 16% 22%, rgba(33, 126, 255, 0.2), transparent 46%),
+    radial-gradient(circle at 80% 74%, rgba(98, 155, 255, 0.18), transparent 44%),
+    linear-gradient(124deg, rgba(16, 30, 54, 0.9), rgba(4, 8, 15, 0.94), rgba(18, 36, 64, 0.88));
+  background-size: 160% 160%;
+}
+
+.system-design-overlay-panel {
+  border-radius: 0;
+  background: linear-gradient(150deg, rgba(8, 18, 32, 0.96), rgba(4, 8, 14, 0.98));
+}
+
+.system-design-overlay-header {
+  box-shadow: 0 16px 42px rgba(4, 14, 28, 0.42);
+}
+
+.magnetic-btn {
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hero-grid,
+  .hero-layer {
+    opacity: 0.35;
+  }
+
+  .case-overlay-progress-wrap {
+    display: none;
+  }
+
+  .process-overlay-progress-wrap {
+    display: none;
+  }
+}
+
