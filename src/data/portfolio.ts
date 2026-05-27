@@ -538,12 +538,7 @@ export const contactLinks: ContactLink[] = [
   {
     id: 'telegram',
     label: 'Telegram',
-    href: '#',
-  },
-  {
-    id: 'behance',
-    label: 'Behance',
-    href: '#',
+    href: 'https://t.me/serrybalka',
   },
 ]
 

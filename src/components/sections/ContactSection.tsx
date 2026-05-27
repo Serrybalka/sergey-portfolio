@@ -14,9 +14,20 @@ export function ContactSection() {
         </p>
 
         <div className="mb-8 flex flex-wrap gap-3">
-          {contactLinks.map((link) => (
-            <MagneticButton key={link.id} href={link.href} label={nb(link.label)} tone={link.id === 'mail' ? 'solid' : 'ghost'} />
-          ))}
+          {contactLinks.map((link) => {
+            const isExternal = /^https?:\/\//i.test(link.href)
+
+            return (
+              <MagneticButton
+                key={link.id}
+                href={link.href}
+                label={nb(link.label)}
+                tone={link.id === 'mail' ? 'solid' : 'ghost'}
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
+              />
+            )
+          })}
         </div>
 
         <a
