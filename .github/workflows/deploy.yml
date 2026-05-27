@@ -50,6 +50,8 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.YC_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.YC_SECRET_ACCESS_KEY }}
       AWS_DEFAULT_REGION: ${{ secrets.YC_REGION }}
+      PRODUCTION_URL: ${{ secrets.PRODUCTION_URL }}
+      PRODUCTION_WWW_URL: ${{ secrets.PRODUCTION_WWW_URL }}
       ROLLBACK_RUN_ID: ${{ github.event.inputs.rollback_run_id }}
       ROLLBACK_ARTIFACT_NAME: ${{ github.event.inputs.rollback_artifact_name }}
     steps:
@@ -217,31 +219,57 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          WEBSITE_URL="https://sergey-portfolio-prod-20260511.website.yandexcloud.net"
-          STATUS_CODE="$(curl -sS -o /tmp/index.html -w "%{http_code}" --retry 5 --retry-all-errors --retry-delay 3 "${WEBSITE_URL}/")"
-          if [ "${STATUS_CODE}" != "200" ] && [ "${STATUS_CODE}" != "301" ] && [ "${STATUS_CODE}" != "302" ]; then
-            echo "::error::Website returned HTTP ${STATUS_CODE}"
-            exit 1
+          PRIMARY_URL="${PRODUCTION_URL:-https://${YC_BUCKET}.website.yandexcloud.net}"
+          WWW_URL="${PRODUCTION_WWW_URL:-}"
+
+          verify_url() {
+            local target_url="${1%/}"
+            local label="$2"
+            local output_file="/tmp/${label}.html"
+            local status_code
+
+            status_code="$(curl -sS -L -o "${output_file}" -w "%{http_code}" --retry 5 --retry-all-errors --retry-delay 3 "${target_url}/")"
+
+            if [ "${status_code}" != "200" ] && [ "${status_code}" != "301" ] && [ "${status_code}" != "302" ]; then
+              echo "::error::${label} returned HTTP ${status_code} (${target_url})"
+              return 1
+            fi
+
+            if [ "${status_code}" = "200" ] && ! grep -Eq 'assets/.*\.(js|css)' "${output_file}"; then
+              echo "::error::${label} index does not contain expected Vite assets references (${target_url})"
+              return 1
+            fi
+
+            echo "${label} health check passed: ${status_code} (${target_url})"
+          }
+
+          verify_url "${PRIMARY_URL}" "primary"
+          if [ -n "${WWW_URL}" ]; then
+            verify_url "${WWW_URL}" "www"
           fi
-          if [ "${STATUS_CODE}" = "200" ] && ! grep -Eq 'assets/.*\.(js|css)' /tmp/index.html; then
-            echo "::error::index.html does not contain expected Vite assets references"
-            exit 1
-          fi
+
           echo "Deployment verification passed."
-          echo "Website URL: ${WEBSITE_URL}"
+          echo "Primary URL: ${PRIMARY_URL}"
+          if [ -n "${WWW_URL}" ]; then
+            echo "WWW URL: ${WWW_URL}"
+          fi
 
       - name: Deployment summary
         shell: bash
         run: |
           set -euo pipefail
-          WEBSITE_URL="http://${YC_BUCKET}.website.yandexcloud.net"
+          PRIMARY_URL="${PRODUCTION_URL:-https://${YC_BUCKET}.website.yandexcloud.net}"
+          WWW_URL="${PRODUCTION_WWW_URL:-not-configured}"
+          FALLBACK_URL="http://${YC_BUCKET}.website.yandexcloud.net"
           {
             echo "## Yandex Cloud deployment"
             echo ""
             echo "- Bucket: \`${YC_BUCKET}\`"
             echo "- Region: \`${YC_REGION}\`"
             echo "- Endpoint: \`${YC_ENDPOINT}\`"
-            echo "- Website: ${WEBSITE_URL}"
+            echo "- Primary website: ${PRIMARY_URL}"
+            echo "- WWW website: ${WWW_URL}"
+            echo "- Fallback website: ${FALLBACK_URL}"
             echo "- Mirror: http://website.yandexcloud.net/${YC_BUCKET}/"
             if [ -n "${ROLLBACK_RUN_ID:-}" ]; then
               echo "- Mode: rollback from run \`${ROLLBACK_RUN_ID}\`"

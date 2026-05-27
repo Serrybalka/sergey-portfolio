@@ -40,6 +40,10 @@ npm run preview
 - `YC_SECRET_ACCESS_KEY`
 - `YC_REGION`
 
+Опциональные secrets для custom-domain health-check:
+- `PRODUCTION_URL` (например `https://productsignal.ru`)
+- `PRODUCTION_WWW_URL` (например `https://www.productsignal.ru`)
+
 Что делает pipeline:
 1. Собирает Vite-бандл в GitHub Runner (`npm ci`, `npm run build`).
 2. Валидирует `dist/` и `dist/index.html`.
@@ -51,6 +55,7 @@ npm run preview
 
 Полная эксплуатационная документация:
 - [`docs/deploy/yandex-cloud.md`](docs/deploy/yandex-cloud.md)
+- [`docs/deploy/custom-domain-productsignal.md`](docs/deploy/custom-domain-productsignal.md)
 
 ## Где редактировать контент
 
