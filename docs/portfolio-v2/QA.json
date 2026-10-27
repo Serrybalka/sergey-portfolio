@@ -74,5 +74,13 @@
   "draftBoundary": {
     "command": "node scripts/check-draft-boundary.mjs",
     "result": "Unique draft sentinel absent from48 client/SSR/static files, routes, navigation and sitemap; source content restored byte-for-byte; final build/check passed"
+  },
+  "githubCI": {
+    "sourceCommit": "e7bd72059c49a6c15df32e0487d29723717961ec",
+    "pushRun": 40581733913,
+    "pullRequestRun": 40581773813,
+    "build": "success for push and PR",
+    "artifactUpload": "success on push; skipped on PR as configured",
+    "deploy": "skipped by guard; publication not verified"
   }
 }

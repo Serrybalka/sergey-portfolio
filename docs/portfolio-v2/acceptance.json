@@ -272,8 +272,8 @@
       "checkpoint": 4,
       "key": "release_trace",
       "criterion": "Релиз связан с коммитом и проверенным артефактом; сохранены актуальный HEAD и посторонние файлы.",
-      "status": "в работе",
-      "evidence": null
+      "status": "проверен и завершён",
+      "evidence": "Source commit e7bd720 and Pages artifact12770041975 linked by GitHub run40581733913; npm ci/build/static validation and artifact upload succeeded; old main unchanged. See RELEASE.json. Deploy skipped pending configuration."
     },
     {
       "id": "4.08",
@@ -584,8 +584,8 @@
     "domainStatus": "указан в старом runbook; владение и DNS не проверены"
   },
   "progress": {
-    "verified": 29,
+    "verified": 30,
     "applicable": 60,
-    "percent": 48
+    "percent": 50
   }
 }
