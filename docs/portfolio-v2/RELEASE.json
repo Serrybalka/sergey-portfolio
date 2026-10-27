@@ -1,0 +1,34 @@
+{
+  "stage": "verified source and build artifact; not deployed",
+  "sourceCommit": "e7bd72059c49a6c15df32e0487d29723717961ec",
+  "sourceTree": "b9c41af1164ccb4f6962374c35456511d44e8e59",
+  "branch": "portfolio/pages-v2-20261027",
+  "pullRequest": "https://github.com/Serrybalka/sergey-portfolio/pull/1",
+  "pushRun": {
+    "id": 40581733913,
+    "url": "https://github.com/Serrybalka/sergey-portfolio/actions/runs/40581733913",
+    "build": "success",
+    "deploy": "skipped"
+  },
+  "pullRequestRun": {
+    "id": 40581773813,
+    "build": "success",
+    "deploy": "skipped"
+  },
+  "artifact": {
+    "id": 12770041975,
+    "name": "github-pages",
+    "sizeBytes": 359287,
+    "digest": "sha256:75bd98b66d41067a5d11baf7958a4e5205cd05c9321a82ca9c775a315ed9fe96",
+    "sourceCommit": "e7bd72059c49a6c15df32e0487d29723717961ec",
+    "expiresAt": "2026-10-28T20:51:50Z",
+    "validation": "CI checks passed before upload; downloaded bytes not independently inspected"
+  },
+  "pending": [
+    "Protected GitHub browser login and Pages/environment/variable configuration",
+    "Actual deployment and published-page verification",
+    "Domain ownership, DNS baseline, HTTPS and rollback",
+    "Owner case artifacts and approved resume",
+    "Remaining browser/accessibility acceptance checks"
+  ]
+}

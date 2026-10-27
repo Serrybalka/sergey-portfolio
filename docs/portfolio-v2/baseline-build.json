@@ -1,0 +1,11 @@
+{
+  "referenceCommit": "b7de392",
+  "scope": "production client build only; not field performance or lab Core Web Vitals",
+  "cssBytes": 58430,
+  "initialJsBytes": 661010,
+  "initialJsGzipBytes": 206790,
+  "lazyHeroJsBytes": 885950,
+  "lazyHeroJsGzipBytes": 235920,
+  "sourceHtmlBytes": 1220,
+  "initialHtmlContent": "empty React root; client rendered"
+}

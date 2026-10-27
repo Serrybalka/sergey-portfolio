@@ -22,3 +22,7 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Static portfolio build artifacts
+.prerender/
+.openai/

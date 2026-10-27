@@ -1,0 +1,591 @@
+{
+  "source": "ui-ux-portfolio-setup-prompt-extended.md",
+  "mandatoryCount": 60,
+  "mandatoryByCheckpoint": {
+    "1": 8,
+    "2": 8,
+    "3": 10,
+    "4": 9,
+    "5": 8,
+    "6": 10,
+    "9": 7
+  },
+  "mandatory": [
+    {
+      "id": "1.01",
+      "checkpoint": 1,
+      "key": "source_ownership",
+      "criterion": "Зафиксировать источники дизайна, контента, ресурсов и поведения; материалы Дмитрия оставить референсом, не опытом Сергея.",
+      "status": "проверен и завершён",
+      "evidence": "Аудит источников: своё содержание из интервью; сайт Дмитрия только референс структуры."
+    },
+    {
+      "id": "1.02",
+      "checkpoint": 1,
+      "key": "source_audit",
+      "criterion": "Проверить фактический код/репозитории, доступы и ограничения статического хостинга; не считать HTML исходным проектом.",
+      "status": "проверен и завершён",
+      "evidence": "Клон Serrybalka/sergey-portfolio, main b7de392, React/Vite; GitHubadmin подтверждён."
+    },
+    {
+      "id": "1.03",
+      "checkpoint": 1,
+      "key": "positioning",
+      "criterion": "Установить аудиторию и позиционирование по подтверждённому опыту.",
+      "status": "проверен и завершён",
+      "evidence": "SeniorProductDesigner/DesignLead, B2B/DS/AI, РФremoteМосква1день."
+    },
+    {
+      "id": "1.04",
+      "checkpoint": 1,
+      "key": "sitemap",
+      "criterion": "Определить страницы и реально необходимые функции.",
+      "status": "проверен и завершён",
+      "evidence": "Главная/About/Work/5cases/DS/404, контакт/резюме по запросу."
+    },
+    {
+      "id": "1.05",
+      "checkpoint": 1,
+      "key": "stack",
+      "criterion": "Выбрать минимальный статический стек и обосновать готовые решения/альтернативы.",
+      "status": "проверен и завершён",
+      "evidence": "Сохранён React/Vite/TS; статический prerender официальным ViteSSR, lucide-icons."
+    },
+    {
+      "id": "1.06",
+      "checkpoint": 1,
+      "key": "licenses",
+      "criterion": "Проверить происхождение и лицензии шрифтов, иконок, шаблонов и библиотек.",
+      "status": "проверен и завершён",
+      "evidence": "LICENSES.md: installed package licenses; Unsplash manifest with authors/license; system font stack."
+    },
+    {
+      "id": "1.07",
+      "checkpoint": 1,
+      "key": "configuration",
+      "criterion": "Разделить публичную конфигурацию, CI/локальные секреты и среду агента; сохранить исходники/откат.",
+      "status": "проверен и завершён",
+      "evidence": "Изолированная ветка portfolio/pages-v2-20261027; существующий Yandexworkflow/DNS не изменяются."
+    },
+    {
+      "id": "1.08",
+      "checkpoint": 1,
+      "key": "plan",
+      "criterion": "Создать PLAN с неизменным объёмом, критериями, доказательствами, статусами и блокерами.",
+      "status": "проверен и завершён",
+      "evidence": "PLAN и фиксированные 60 критериев; опции отдельно."
+    },
+    {
+      "id": "2.01",
+      "checkpoint": 2,
+      "key": "case_selection",
+      "criterion": "Выбрать несколько сильных кейсов; обозначить реальный тип, роль, период и стадию.",
+      "status": "проверен и завершён",
+      "evidence": "src/portfolio/content.json: 5 cases with kind, role, stage, NDA and confirmed periods."
+    },
+    {
+      "id": "2.02",
+      "checkpoint": 2,
+      "key": "content_schema",
+      "criterion": "Отделить контент от шаблонов; валидировать slug, обязательные поля, alt и связанные ссылки.",
+      "status": "проверен и завершён",
+      "evidence": "data.ts runtime validation and successful prerender of all visible cases."
+    },
+    {
+      "id": "2.03",
+      "checkpoint": 2,
+      "key": "draft_control",
+      "criterion": "Разделить draft/published страницы и стадию проекта; черновики не попадут в public navigation/sitemap/build.",
+      "status": "проверен и завершён",
+      "evidence": "Vite build plugin removes draft cases before JSON transformation in client and SSR. check-draft-boundary.mjs passed: unique draft sentinel/slug absent from 48 bundled/static files, routes/navigation/sitemap; original content restored byte-for-byte and final type-check/build/check passed. Dev source remains public-safe only; public assets are independently publication-ready."
+    },
+    {
+      "id": "2.04",
+      "checkpoint": 2,
+      "key": "case_narrative",
+      "criterion": "Раскрыть проблему, личный вклад, аргументацию, проверку и результат по доступным фактам.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "2.05",
+      "checkpoint": 2,
+      "key": "claim_integrity",
+      "criterion": "Согласовать числовые/качественные утверждения, атрибуцию, NDA и источники; не создавать фиктивные достижения.",
+      "status": "проверен и завершён",
+      "evidence": "New content audited against interview; invented legacy metrics, dates and launch claims excluded."
+    },
+    {
+      "id": "2.06",
+      "checkpoint": 2,
+      "key": "visual_evidence",
+      "criterion": "Подготовить читаемые иллюстрации/подписи/увеличение; временные изображения явно отделены от реальных артефактов.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "2.07",
+      "checkpoint": 2,
+      "key": "cross_material",
+      "criterion": "Сверить главную, карточки, кейсы, About, резюме/PDF и локализацию при наличии.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "2.08",
+      "checkpoint": 2,
+      "key": "content_review",
+      "criterion": "Оценить каждый кейс по полноте, проверить контакты/резюме/ссылки; недостающие факты внесены в вопросы.",
+      "status": "проверен и завершён",
+      "evidence": "CONTENT.md assesses completeness and missing proof; contacts/request resume route present."
+    },
+    {
+      "id": "3.01",
+      "checkpoint": 3,
+      "key": "shared_ui",
+      "criterion": "Общие компоненты и семантические токены — единый источник сайта и /ds.",
+      "status": "проверен и завершён",
+      "evidence": "Site and /ds import ui.tsx, tokens.ts and same CSS; browser DS inspected."
+    },
+    {
+      "id": "3.02",
+      "checkpoint": 3,
+      "key": "ds_catalog",
+      "criterion": "/ds показывает реально используемые foundations, компоненты, варианты и правила применения.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "3.03",
+      "checkpoint": 3,
+      "key": "contracts",
+      "criterion": "Контракты компонентов описывают данные, состояния, клавиатуру и ограничения без неиспользуемой библиотеки.",
+      "status": "проверен и завершён",
+      "evidence": "DS-RULES.md documents actual component contracts and consumers."
+    },
+    {
+      "id": "3.04",
+      "checkpoint": 3,
+      "key": "responsive",
+      "criterion": "Проверить адаптивы и реальные ширины/медиазапросы, в том числе длинные значения.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "3.05",
+      "checkpoint": 3,
+      "key": "states",
+      "criterion": "Реальные hover/focus-visible/active/disabled/loading/error там, где применимо.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "3.06",
+      "checkpoint": 3,
+      "key": "accessibility",
+      "criterion": "Семантика ссылок/кнопок, accessible names, декоративные иконки и клавиатурное поведение.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "3.07",
+      "checkpoint": 3,
+      "key": "motion_contract",
+      "criterion": "У используемых эффектов определены триггеры, остановка/отмена, reduced-motion и fallback.",
+      "status": "проверен и завершён",
+      "evidence": "DS-RULES.md describes CSS transition/reduced-motion behavior and static reading fallback."
+    },
+    {
+      "id": "3.08",
+      "checkpoint": 3,
+      "key": "ds_matrix",
+      "criterion": "Матрица компонент → источник → потребители → /ds → проверенные размеры/состояния.",
+      "status": "проверен и завершён",
+      "evidence": "DS-RULES.md contains source/consumer/DS/check matrix and limitations."
+    },
+    {
+      "id": "3.09",
+      "checkpoint": 3,
+      "key": "ds_comparison",
+      "criterion": "Сравнить сайт и /ds в одинаковых условиях; устранить необъяснённые расхождения.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "3.10",
+      "checkpoint": 3,
+      "key": "ds_direct",
+      "criterion": "/ds доступна напрямую и после refresh, noindex, исключена из sitemap; это не защита NDA.",
+      "status": "проверен и завершён",
+      "evidence": "Direct /ds/ loaded in Chromium; generated noindex and excluded sitemap verified."
+    },
+    {
+      "id": "4.01",
+      "checkpoint": 4,
+      "key": "source_structure",
+      "criterion": "Понятные исходники, gitignore, lock-файл, runtime и команды установки/проверки/build.",
+      "status": "проверен и завершён",
+      "evidence": "React/Vite/TS preserved; lock file, npm commands and source structure documented."
+    },
+    {
+      "id": "4.02",
+      "checkpoint": 4,
+      "key": "ci_reproducibility",
+      "criterion": "Чистая воспроизводимая установка и штатная сборка проходят.",
+      "status": "проверен и завершён",
+      "evidence": "Fresh npm ci with final lock succeeded; final TypeScript/client/SSR build succeeded with nested Pages base."
+    },
+    {
+      "id": "4.03",
+      "checkpoint": 4,
+      "key": "official_workflow",
+      "criterion": "Актуальный официальный GitHub Pages workflow и один deploy-механизм.",
+      "status": "проверен и завершён",
+      "evidence": "pages-v2.yml uses exact official action releases; separate branch and disabled-until-configured Pages deploy."
+    },
+    {
+      "id": "4.04",
+      "checkpoint": 4,
+      "key": "ci_permissions",
+      "criterion": "Минимальные права, github-pages environment, OIDC/pages только deploy, безопасная concurrency.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "4.05",
+      "checkpoint": 4,
+      "key": "pr_policy",
+      "criterion": "PR проверяет, выбранная ветка публикует; без pull_request_target для непроверенного кода.",
+      "status": "проверен и завершён",
+      "evidence": "PR only builds/checks; separate selected-branch deploy guarded; no pull_request_target."
+    },
+    {
+      "id": "4.06",
+      "checkpoint": 4,
+      "key": "routing_base",
+      "criterion": "Корректный base path github.io/custom domain; прямые HTML-маршруты и настоящий 404.",
+      "status": "проверен и завершён",
+      "evidence": "Static checks passed for / and /sergey-portfolio/; nested case loaded with correct back route and 0 broken images."
+    },
+    {
+      "id": "4.07",
+      "checkpoint": 4,
+      "key": "release_trace",
+      "criterion": "Релиз связан с коммитом и проверенным артефактом; сохранены актуальный HEAD и посторонние файлы.",
+      "status": "проверен и завершён",
+      "evidence": "Source commit e7bd720 and Pages artifact12770041975 linked by GitHub run40581733913; npm ci/build/static validation and artifact upload succeeded; old main unchanged. See RELEASE.json. Deploy skipped pending configuration."
+    },
+    {
+      "id": "4.08",
+      "checkpoint": 4,
+      "key": "build_privacy",
+      "criterion": "В итоговой публикации нет секретов, закрытых оригиналов/брифов/конфигураций агента и лишнего демо.",
+      "status": "проверен и завершён",
+      "evidence": "check-pages scan of dist passes: no secret/config/source-archive paths; docs are outside public."
+    },
+    {
+      "id": "4.09",
+      "checkpoint": 4,
+      "key": "deploy_verification",
+      "criterion": "Проверен тестовый и опубликованный deploy, вложенные страницы, /ds, ресурсы и инструкция отката.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "5.01",
+      "checkpoint": 5,
+      "key": "dns_baseline",
+      "criterion": "Определены авторитетные NS/панель; сохранена текущая зона и таблица изменений/отката.",
+      "status": "ожидает владельца/сервиса",
+      "evidence": "Domain candidate only; browser GitHub signed out; DNS read attempt ECONNREFUSED; no zone changes."
+    },
+    {
+      "id": "5.02",
+      "checkpoint": 5,
+      "key": "domain_verification",
+      "criterion": "TXT владения от GitHub сохранена; custom domain задан в Pages до DNS-переключения.",
+      "status": "ожидает владельца/сервиса",
+      "evidence": "Domain candidate only; browser GitHub signed out; DNS read attempt ECONNREFUSED; no zone changes."
+    },
+    {
+      "id": "5.03",
+      "checkpoint": 5,
+      "key": "dns_records",
+      "criterion": "Актуальные A/AAAA и www CNAME от GitHub, без конфликтов/wildcard/CNAME на @.",
+      "status": "ожидает владельца/сервиса",
+      "evidence": "Domain candidate only; browser GitHub signed out; DNS read attempt ECONNREFUSED; no zone changes."
+    },
+    {
+      "id": "5.04",
+      "checkpoint": 5,
+      "key": "dns_preservation",
+      "criterion": "Сохранены почта, SPF/DKIM/DMARC, подтверждения, поддомены и необходимые услуги.",
+      "status": "ожидает владельца/сервиса",
+      "evidence": "Domain candidate only; browser GitHub signed out; DNS read attempt ECONNREFUSED; no zone changes."
+    },
+    {
+      "id": "5.05",
+      "checkpoint": 5,
+      "key": "dns_resolution",
+      "criterion": "Фактические NS/A/AAAA/CNAME/TXT/CAA проверены у авторитетных и публичных резолверов.",
+      "status": "ожидает владельца/сервиса",
+      "evidence": "Domain candidate only; browser GitHub signed out; DNS read attempt ECONNREFUSED; no zone changes."
+    },
+    {
+      "id": "5.06",
+      "checkpoint": 5,
+      "key": "https",
+      "criterion": "Сертификат действителен и Enforce HTTPS включён; CAA/DNSSEC проблемы исследованы без ослабления защиты.",
+      "status": "ожидает владельца/сервиса",
+      "evidence": "Domain candidate only; browser GitHub signed out; DNS read attempt ECONNREFUSED; no zone changes."
+    },
+    {
+      "id": "5.07",
+      "checkpoint": 5,
+      "key": "canonical_redirects",
+      "criterion": "Проверены HTTP→HTTPS и выбранный www/apex, цепочка редиректов, query/hash где контролируются.",
+      "status": "ожидает владельца/сервиса",
+      "evidence": "Domain candidate only; browser GitHub signed out; DNS read attempt ECONNREFUSED; no zone changes."
+    },
+    {
+      "id": "5.08",
+      "checkpoint": 5,
+      "key": "domain_paths",
+      "criterion": "Главная, кейсы и /ds доступны через собственный домен; старый сайт/возврат готовы до переключения.",
+      "status": "ожидает владельца/сервиса",
+      "evidence": "Domain candidate only; browser GitHub signed out; DNS read attempt ECONNREFUSED; no zone changes."
+    },
+    {
+      "id": "6.01",
+      "checkpoint": 6,
+      "key": "performance_baseline",
+      "criterion": "Baseline/повторные лабораторные измерения в сопоставимых условиях и реалистичный бюджет.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "6.02",
+      "checkpoint": 6,
+      "key": "media_pipeline",
+      "criterion": "Оригинал → производная → public; размеры/srcset/sizes/lazy, читаемость UI и сохранение прозрачности/crop.",
+      "status": "проверен и завершён",
+      "evidence": "10 WebP derivatives from 5 source photos, srcset/sizes/dimensions and manifest; originals outside public."
+    },
+    {
+      "id": "6.03",
+      "checkpoint": 6,
+      "key": "critical_loading",
+      "criterion": "Первый экран и чтение не зависят от галереи, анимационного ZIP/SDK; нет лишних ресурсов.",
+      "status": "проверен и завершён",
+      "evidence": "Prerendered content does not wait for WebGL, gallery archives or analytics; no tracking SDK."
+    },
+    {
+      "id": "6.04",
+      "checkpoint": 6,
+      "key": "failure_fallbacks",
+      "criterion": "Проверены отказ изображения/шрифта, no-JS/static fallback, холодная и медленная загрузка.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "6.05",
+      "checkpoint": 6,
+      "key": "motion_behavior",
+      "criterion": "Если есть эффекты — hidden-tab/offscreen pause, reduced-motion, resize, cancel/reverse и Back/BFCache.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "6.06",
+      "checkpoint": 6,
+      "key": "seo_html",
+      "criterion": "В опубликованном HTML уникальные title/description/canonical/OG/lang, осмысленные заголовки и основной текст.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "6.07",
+      "checkpoint": 6,
+      "key": "indexing",
+      "criterion": "Favicon/robots/sitemap корректны, /ds/drafts/технические дубли исключены, lastmod не равен каждому build.",
+      "status": "проверен и завершён",
+      "evidence": "Generated favicon, robots and empty preview sitemap verified; DS/404/preview noindex."
+    },
+    {
+      "id": "6.08",
+      "checkpoint": 6,
+      "key": "browser_accessibility",
+      "criterion": "Ссылки/console/mixed content/alt/контраст/фокус/меню и диалоги проверены.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "6.09",
+      "checkpoint": 6,
+      "key": "cross_browser",
+      "criterion": "Целевые Chromium и WebKit desktop/mobile, узкий экран, zoom, длинный текст, direct URL/hash, Back/resize.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "6.10",
+      "checkpoint": 6,
+      "key": "native_actions",
+      "criterion": "Нативные ссылки/new tab/PDF сохранены, Back с fallback; copy-success только после успеха и ручной fallback при отказе.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "9.01",
+      "checkpoint": 9,
+      "key": "end_to_end",
+      "criterion": "Опубликованный путь главная→кейс→резюме/контакт проверен на desktop/mobile.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "9.02",
+      "checkpoint": 9,
+      "key": "public_acceptance",
+      "criterion": "На опубликованной версии проверены собственный домен, HTTPS, /ds, direct URLs и 404.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "9.03",
+      "checkpoint": 9,
+      "key": "ds_closeout",
+      "criterion": "Закрыта матрица ДС после последних изменений, карта событий — только если статистика включена.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "9.04",
+      "checkpoint": 9,
+      "key": "final_privacy",
+      "criterion": "Финальный scan исходников и build: нет секретов и недопустимых NDA-материалов.",
+      "status": "проверен и завершён",
+      "evidence": "Built file scan passes; no NDA UI or credentials added; archive reference contains no live credentials."
+    },
+    {
+      "id": "9.05",
+      "checkpoint": 9,
+      "key": "handoff_docs",
+      "criterion": "README/PLAN объясняют запуск, контент/ДС/медиа, deploy/rollback, DNS и диагностику.",
+      "status": "проверен и завершён",
+      "evidence": "README, PLAN, DEPLOY, DS-RULES, CONTENT and LICENSES cover current implementation and pending actions."
+    },
+    {
+      "id": "9.06",
+      "checkpoint": 9,
+      "key": "release_evidence",
+      "criterion": "Переданы repo/site/ds, коммит/артефакт/deploy/проверенная версия и подтверждены права владельца.",
+      "status": "в работе",
+      "evidence": null
+    },
+    {
+      "id": "9.07",
+      "checkpoint": 9,
+      "key": "honest_report",
+      "criterion": "Отчёт N/M, статусы, автоматические/ручные/эмулированные проверки, ограничения, остатки и регулярные расходы.",
+      "status": "в работе",
+      "evidence": null
+    }
+  ],
+  "optionsByCheckpoint": {
+    "7": [
+      {
+        "id": "7.01",
+        "key": "providers",
+        "criterion": "Выбран минимальный набор сервисов в аккаунтах Сергея; тарифы/согласия/маскирование проверены.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "7.02",
+        "key": "action_map",
+        "criterion": "Инвентаризированы реальные значимые действия; стабильная семантика, параметры и исключения.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "7.03",
+        "key": "qa_policy",
+        "criterion": "До загрузки SDK действует единая QA/owner/DS политика и сохранение при переходах.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "7.04",
+        "key": "events",
+        "criterion": "Один event на реальное действие, попытка/успех разделены, нет чувствительных payload и дублей.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "7.05",
+        "key": "failure",
+        "criterion": "Сбой SDK не ломает сайт; очереди ограничены и не отправляют запрещённые события задним числом.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "7.06",
+        "key": "evidence",
+        "criterion": "Изолированные проверки, сетевое отсутствие QA и реальные отчёты различены; не создаётся синтетический production-трафик.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "7.07",
+        "key": "operations",
+        "criterion": "Настроены полезные отчёты, описаны стоимость/отключение; история сохранена.",
+        "status": "не применяется — владелец не выбирал"
+      }
+    ],
+    "8": [
+      {
+        "id": "8.01",
+        "key": "monitor",
+        "criterion": "Выбраны монитор/интервал/локации/status/content/HTTPS/канал и согласованный тариф.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "8.02",
+        "key": "monitor_qa",
+        "criterion": "HTTP и browser-check различены, монитор не загрязняет аналитику; trial и будущая цена описаны.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "8.03",
+        "key": "integrations",
+        "criterion": "Форма/антиспам/Search Console/Вебмастер/CI/editor включаются только по потребности и проходят проверку.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "8.04",
+        "key": "ai_profile",
+        "criterion": "Если выбран AI-профиль: единый подтверждённый источник, NDA, copy/manual fallback без обещаний индексации.",
+        "status": "не применяется — владелец не выбирал"
+      },
+      {
+        "id": "8.05",
+        "key": "operations",
+        "criterion": "Для выбранных опций есть параметры, подтверждённый тест, уведомления, расходы и отключение; невключённые N/A.",
+        "status": "не применяется — владелец не выбирал"
+      }
+    ]
+  },
+  "notes": [
+    "Это операционная декомпозиция критериев из промпта, а не предоставленный промптом фиксированный счётчик. Зафиксировать M=60 и менять лишь явно при изменении объёма.",
+    "На этом аудите фактическая реализация не проверялась: статусы — стартовый шаблон; root выставляет по доказательствам.",
+    "Случайные изображения разрешены последним сообщением пользователя, но должны обозначаться временными и не становиться ложными артефактами/достижениями.",
+    "Проект Сергея; материалы Дмитрия — референс, без копирования его опыта/контактов/идентификаторов/кода."
+  ],
+  "project": {
+    "repository": "https://github.com/Serrybalka/sergey-portfolio",
+    "branch": "portfolio/pages-v2-20261027",
+    "mode": "preview",
+    "domainCandidate": "productsignal.ru",
+    "domainStatus": "указан в старом runbook; владение и DNS не проверены"
+  },
+  "progress": {
+    "verified": 30,
+    "applicable": 60,
+    "percent": 50
+  }
+}
