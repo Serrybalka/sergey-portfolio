@@ -1,0 +1,216 @@
+{
+  "version": 1,
+  "note": "Temporary licensed editorial images. Not Sergey Rybalka project artifacts. Replace with owner-supplied materials before final case review.",
+  "assets": [
+    {
+      "key": "architecture",
+      "title": "Геометрия стеклянного здания",
+      "purpose": "temporary-case-cover",
+      "isPlaceholder": true,
+      "isRealProjectArtifact": false,
+      "author": "Étienne Beauregard-Riverin",
+      "sourceUrl": "https://unsplash.com/photos/architectural-photography-of-blue-glass-building-yA-WIoC-wiA",
+      "downloadUrl": "https://images.unsplash.com/photo-1448459322288-678e8f2bb7f9?auto=format&fit=crop&fm=jpg&ixid=NHwxMjA3fDA%3D&ixlib=rb-4.1.0&q=85&w=3000",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "verifiedDate": "2026-10-27",
+      "sourceDimensions": [
+        3000,
+        2430
+      ],
+      "sourceBytes": 869208,
+      "sourceSha256": "d06d4342dd4412cee3bccf735f583915adb8b896da4c8ecec7f76452b3514952",
+      "httpStatus": 200,
+      "derivatives": [
+        {
+          "path": "/media/placeholders/architecture.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 61712,
+          "sha256": "ecac7dc0f9b6eddda5901c16ce01d36bc65091b938e9ec5173626938416a19b2",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        },
+        {
+          "path": "/media/placeholders/architecture-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 13022,
+          "sha256": "94a3e773b0ec929a33155333ab306154612f6d7f8200dbb18a13b20083e2a4f3",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        }
+      ]
+    },
+    {
+      "key": "glass",
+      "title": "Стеклянный фасад на фоне неба",
+      "purpose": "temporary-case-cover",
+      "isPlaceholder": true,
+      "isRealProjectArtifact": false,
+      "author": "Simone Hutsch",
+      "sourceUrl": "https://unsplash.com/photos/modern-glass-building-against-a-clear-sky-xaWHf0SczK4",
+      "downloadUrl": "https://images.unsplash.com/photo-1761724297938-30203b58ed95?auto=format&fit=crop&fm=jpg&ixid=NHwxMjA3fDA%3D&ixlib=rb-4.1.0&q=85&w=3000",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "verifiedDate": "2026-10-27",
+      "sourceDimensions": [
+        3000,
+        4243
+      ],
+      "sourceBytes": 850327,
+      "sourceSha256": "73d35383670ce67157e31018ea9a4b4ebe376ad11fdbe7ae7f6299ae78dbdd61",
+      "httpStatus": 200,
+      "derivatives": [
+        {
+          "path": "/media/placeholders/glass.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 28394,
+          "sha256": "cb01e64aca88d6f47dafc19cb500aba7884c36adbcc18be718597ee6e4307d3b",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        },
+        {
+          "path": "/media/placeholders/glass-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 8440,
+          "sha256": "40081206dd0f54b938e049bf271af77b539598a1e425b1222dfffff4a01c2a09",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        }
+      ]
+    },
+    {
+      "key": "workshop",
+      "title": "Инструменты на верстаке",
+      "purpose": "temporary-case-cover",
+      "isPlaceholder": true,
+      "isRealProjectArtifact": false,
+      "author": "Ben Spray",
+      "sourceUrl": "https://unsplash.com/photos/workshop-tools-are-scattered-on-a-work-table-f0T-eGanP_4",
+      "downloadUrl": "https://images.unsplash.com/photo-1745449064670-94bd0fc13df8?auto=format&fit=crop&fm=jpg&ixid=NHwxMjA3fDA%3D&ixlib=rb-4.1.0&q=85&w=3000",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "verifiedDate": "2026-10-27",
+      "sourceDimensions": [
+        3000,
+        1986
+      ],
+      "sourceBytes": 714278,
+      "sourceSha256": "e904964504a404e8daecfcd82410ef0473a662f9f7a98f778839a250fc97bb4e",
+      "httpStatus": 200,
+      "derivatives": [
+        {
+          "path": "/media/placeholders/workshop.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 69520,
+          "sha256": "f152cf4cd8c793b9e37ca8ff539434e82cacfaece82d283594cb7b7bdc02a545",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        },
+        {
+          "path": "/media/placeholders/workshop-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 21460,
+          "sha256": "6c632d8fac610b3e6a23e25c08cfadf46809d0ccf41578a09420b248aa13126b",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        }
+      ]
+    },
+    {
+      "key": "paper",
+      "title": "Абстрактная композиция из белых криволинейных форм",
+      "purpose": "temporary-case-cover",
+      "isPlaceholder": true,
+      "isRealProjectArtifact": false,
+      "author": "Bharath Kumar",
+      "sourceUrl": "https://unsplash.com/photos/abstract-white-paper-curves-creating-a-flowing-pattern-UsR7efHDjW4",
+      "downloadUrl": "https://images.unsplash.com/photo-1773670867823-8742554140d8?auto=format&fit=crop&fm=jpg&ixid=NHwxMjA3fDA%3D&ixlib=rb-4.1.0&q=85&w=3000",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "verifiedDate": "2026-10-27",
+      "sourceDimensions": [
+        3000,
+        4500
+      ],
+      "sourceBytes": 545047,
+      "sourceSha256": "c2c093aeed990d70f3ebd9f228c213b86a41c7d2fe8da64c7b00cf5c54a8ef71",
+      "httpStatus": 200,
+      "derivatives": [
+        {
+          "path": "/media/placeholders/paper.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 26272,
+          "sha256": "b2d503ffbb54209e83fdb78390239ef143a04938d95001eb40e35a15df76f7e0",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        },
+        {
+          "path": "/media/placeholders/paper-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 8444,
+          "sha256": "c89dceb280e9acf9d4d1749fb3e7b80b71ab941e78b6e077e84cc5a6e3f6a9e9",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        }
+      ]
+    },
+    {
+      "key": "curves",
+      "title": "Абстрактные белые формы",
+      "purpose": "temporary-case-cover",
+      "isPlaceholder": true,
+      "isRealProjectArtifact": false,
+      "author": "Pawel Czerwinski",
+      "sourceUrl": "https://unsplash.com/photos/abstract-shapes-of-white-paper-gently-curving-yKVBAM-gKJo",
+      "downloadUrl": "https://images.unsplash.com/photo-1741806914412-340ca16e9175?auto=format&fit=crop&fm=jpg&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&ixlib=rb-4.1.0&q=85&w=3000",
+      "license": "Unsplash License",
+      "licenseUrl": "https://unsplash.com/license",
+      "verifiedDate": "2026-10-27",
+      "sourceDimensions": [
+        3000,
+        4500
+      ],
+      "sourceBytes": 1326672,
+      "sourceSha256": "7876c395fa23c803747a9a3f37c795572889d3e15ff634aa2b0b6d906327cb02",
+      "httpStatus": 200,
+      "derivatives": [
+        {
+          "path": "/media/placeholders/curves.webp",
+          "width": 1200,
+          "height": 800,
+          "bytes": 8106,
+          "sha256": "5f2b417a94e5249994d519d59e28050d7e312ca4127d497254945d5daa889ee5",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        },
+        {
+          "path": "/media/placeholders/curves-480.webp",
+          "width": 480,
+          "height": 320,
+          "bytes": 1514,
+          "sha256": "1f53659752d29c5af9daa50d938e6ae46eeaaf6db8219e0c604747c3dbf98808",
+          "quality": 84,
+          "source": "original",
+          "crop": "center cover 3:2"
+        }
+      ]
+    }
+  ]
+}

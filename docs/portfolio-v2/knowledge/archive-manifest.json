@@ -1,0 +1,21 @@
+{
+  "archive": "ui-ux-portfolio-platform.zip",
+  "sourceSha256": "a34a86ed5ee5e6acbc1cbcf3657e619307961c17d272b8e031153c99daf66e96",
+  "files": [
+    {
+      "file": "ui-ux-portfolio-platform/SKILL.md",
+      "bytes": 4456,
+      "sha256": "5fe96761b6ff078ff16016ebe004ac1d420480a36aa363133ca0fe76bf4d34df"
+    },
+    {
+      "file": "ui-ux-portfolio-platform/agents/openai.yaml",
+      "bytes": 132,
+      "sha256": "d0c200bbbea1bedd99b7ca758d3e885e9169c58069c8e1f37c09ceb43c62f324"
+    },
+    {
+      "file": "ui-ux-portfolio-platform/references/portfolio-platform-extended.md",
+      "bytes": 88010,
+      "sha256": "472127490cf407bfbd2daa713099e9ad0ba3e0438608d4aed57a5f23caa412b6"
+    }
+  ]
+}

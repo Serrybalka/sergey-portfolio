@@ -1,0 +1,69 @@
+name: Portfolio v2 — GitHub Pages
+
+on:
+  push:
+    branches: [portfolio/pages-v2-20261027]
+  pull_request:
+    branches: [main, portfolio/pages-v2-20261027]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A running deployment is allowed to complete. This workflow does not publish
+# main and does not call the existing Yandex Object Storage workflow.
+concurrency:
+  group: portfolio-pages-v2-${{ github.ref }}
+  cancel-in-progress: false
+
+env:
+  PUBLIC_BASE_PATH: /sergey-portfolio/
+  SITE_URL: https://serrybalka.github.io
+  PUBLIC_INDEXABLE: 'false'
+  JS_GZIP_BUDGET_KB: '110'
+
+jobs:
+  build:
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/portfolio/pages-v2-20261027'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout the selected revision
+        uses: actions/checkout@v7.0.1
+        with:
+          persist-credentials: false
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: package-lock.json
+      - name: Reproducible dependency installation
+        run: npm ci
+      - name: Type-check and build static pages
+        run: npm run build
+      - name: Validate the built routes, resources and publication contents
+        run: node scripts/check-pages.mjs
+      - name: Upload the verified Pages artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v5.0.0
+        with:
+          path: dist
+          include-hidden-files: true
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/portfolio/pages-v2-20261027' && vars.PORTFOLIO_PAGES_ENABLED == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+      actions: read
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy the artifact produced by the build job
+        id: deployment
+        uses: actions/deploy-pages@v5.0.1

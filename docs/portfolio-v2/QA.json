@@ -1,0 +1,78 @@
+{
+  "scope": "Local static preview in Chromium; not published-site acceptance",
+  "routesInspected": [
+    "/",
+    "/about/",
+    "/ds/",
+    "/sergey-portfolio/work/platform/"
+  ],
+  "responsive": {
+    "method": "same-origin iframe viewport in Chromium, not physical devices",
+    "requestedCssWidths": [
+      390,
+      768
+    ],
+    "observedClientWidths": [
+      375,
+      753
+    ],
+    "observedScrollWidths": [
+      375,
+      753
+    ],
+    "homeToCaseNavigation": "passed at 375 client px"
+  },
+  "copy": {
+    "deniedClipboard": "manual readonly field observed; no false success label",
+    "successfulClipboard": "not confirmed in this browser"
+  },
+  "staticChecks": {
+    "pages": 10,
+    "basePaths": [
+      "/",
+      "/sergey-portfolio/"
+    ],
+    "nestedCaseAssets": "0 broken images observed",
+    "imageLicenses": "source and derivatives recorded in media-manifest.json"
+  },
+  "limitations": [
+    "WebKit not available/tested",
+    "Physical devices and full keyboard/contrast audit not completed",
+    "GitHub browser session signed out; Pages setting not confirmed",
+    "Domain and DNS ownership/access not confirmed",
+    "Final case artifacts and approved resume not supplied"
+  ],
+  "skill": {
+    "name": "ui-ux-portfolio-platform",
+    "archiveFilesPreserved": 3,
+    "referenceIdenticalToPrompt": true,
+    "installation": "verified in personal skill directory"
+  },
+  "desktopFollowup": {
+    "browser": "Chromium managed preview, not WebKit or physical devices",
+    "caseRoutes": [
+      "/sergey-portfolio/work/platform/",
+      "/sergey-portfolio/work/design-system/",
+      "/sergey-portfolio/work/tass/",
+      "/sergey-portfolio/work/sber-health/",
+      "/sergey-portfolio/work/alfa-digital/"
+    ],
+    "caseChecks": "Each case has one H1 and main, distinct title, zero broken images, clientWidth = scrollWidth = 1348",
+    "visualChecks": [
+      "Home",
+      "Alfa Digital",
+      "/ds/",
+      "404"
+    ],
+    "keyboard": "Home first Tab reveals skip link with 3px cobalt outline; Enter moves to #main and next Tab reaches main CTA; DS secondary-to-text-action Tab works",
+    "componentStates": "DS disabled/loading buttons are disabled; loading has aria-busy=true",
+    "contacts": "Verified current mailto, Telegram and LinkedIn destinations",
+    "notFound": "404 retains shell and Home action returns to nested-base home",
+    "console": "No application errors observed; extension metadata errors excluded",
+    "limitations": "Targeted checks; not a complete keyboard or contrast audit"
+  },
+  "draftBoundary": {
+    "command": "node scripts/check-draft-boundary.mjs",
+    "result": "Unique draft sentinel absent from48 client/SSR/static files, routes, navigation and sitemap; source content restored byte-for-byte; final build/check passed"
+  }
+}
